@@ -1,0 +1,27 @@
+name: Manual Deployment
+
+# `workflow_dispatch` allows manual trigger
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build project
+        run: npm run build
+
+      - name: Deploy project
+        # Replace this with the appropriate deploy command for your hosting platform
+        run: npm run deploy  # e.g., `vercel --prod` for Vercel or `netlify deploy --prod` for Netlify
